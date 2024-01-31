@@ -85,7 +85,7 @@ public class ShoppingController {
         ajaxResult.put("data", redisTemplate.opsForHash().get("shopping", id + ""));
         return ajaxResult;
     }
-
+    //
     @DeleteMapping("/deleteShoppingById")
     public @ResponseBody AjaxResult deleteShoppingById(Integer id){
         AjaxResult ajaxResult = new AjaxResult(200, "");
