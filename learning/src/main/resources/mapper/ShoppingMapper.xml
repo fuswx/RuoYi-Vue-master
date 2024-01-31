@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learning.mapper.ShoppingMapper">
+
+    <sql id="getShopping">
+        select * from shoppings
+    </sql>
+
+    <sql id="shoppingConditions">
+        <if test="id != null and id != ''">
+            id = #{id}
+        </if>
+
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+
+        <if test="price != null and price != ''">
+            and price = #{price}
+        </if>
+
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+
+        <if test="type != null and type != ''">
+            and type = #{type}
+        </if>
+    </sql>
+
+    <select id="getShopping" resultMap="shoppingMap">
+        <include refid="getShopping"/>
+        <where>
+            <include refid="shoppingConditions"/>
+        </where>
+    </select>
+
+    <insert id="setShopping">
+        insert into shoppings (id, name, price, status, type) values (#{id}, #{name}, #{price}, #{status}, #{type})
+    </insert>
+
+
+
+    <resultMap id="shoppingMap" type="com.learning.domain.Shopping"/>
+
+</mapper>
